@@ -1,0 +1,28 @@
+body {
+  overflow-y: hidden;
+  margin: 0;
+  background-color: #c8c8c8;
+}
+
+#root {
+  position: relative;
+  padding: 1%;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.app {
+  display: grid;
+  min-height: 100%;
+  grid-column-gap: 1rem;
+  grid-template-columns: 1fr;
+
+  @include tablet {
+    grid-template-columns: 2fr 1fr;
+  }
+}
+
+#root,
+.app {
+  min-width: 100%;
+}
