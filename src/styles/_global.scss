@@ -1,6 +1,18 @@
+* {
+  vertical-align: baseline;
+  margin: 0;
+  border: 0;
+  padding: 0;
+  font-family: Gilroy-Regular, "Segoe UI", Roboto, sans-serif;
+  font-weight: 400;
+  font-size: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 body {
   overflow-y: hidden;
-  margin: 0;
+  line-height: 1;
   background-color: #c8c8c8;
 }
 
@@ -25,4 +37,8 @@ body {
 #root,
 .app {
   min-width: 100%;
+}
+
+h3 {
+  font-size: 1.25rem;
 }
