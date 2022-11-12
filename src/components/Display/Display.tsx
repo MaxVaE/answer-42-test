@@ -1,14 +1,14 @@
 import { useAppSelector } from '../../store/hooks';
 
 function Display() {
-  const products = useAppSelector((state) => state.products.value);
+  const products = useAppSelector((state) => state.products.list);
 
   return (
     <section className="display">
       <ul className="display__list">
         {products.map(({
           name, type, price, id,
-        }, index) => (
+        }) => (
           <li key={id} className="display__product">
             <h3>{name}</h3>
             <p className="display__type">{type}</p>
@@ -19,7 +19,7 @@ function Display() {
                 ₽
               </span>
 
-              <span className="display__number">{index + 1}</span>
+              <span className="display__number">{id}</span>
             </div>
           </li>
         ))}

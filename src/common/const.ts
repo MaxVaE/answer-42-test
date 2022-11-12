@@ -1,5 +1,7 @@
 import { Product } from '../types/product';
 
+export const VALID_MONEY = [50, 100, 200, 500];
+
 export const PRODUCTS: Product[] = [
   {
     id: 1,
