@@ -1,7 +1,8 @@
+import { clsx } from 'clsx';
 import { useAppSelector } from '../../store/hooks';
 
 function Display() {
-  const products = useAppSelector((state) => state.products.list);
+  const { list: products, insertedMoney } = useAppSelector((state) => state.products);
 
   return (
     <section className="display">
@@ -9,7 +10,7 @@ function Display() {
         {products.map(({
           name, type, price, id,
         }) => (
-          <li key={id} className="display__product">
+          <li key={id} className={clsx('display__product', { 'display__product--active': price <= insertedMoney })}>
             <h3>{name}</h3>
             <p className="display__type">{type}</p>
 

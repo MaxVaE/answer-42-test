@@ -23,12 +23,17 @@ export const productsSlice = createSlice({
     setChoosenProductId: (state, action: PayloadAction<number>) => {
       state.choosenProductId = action.payload;
     },
+    setInsertedMoney: (state, action: PayloadAction<number>) => {
+      state.insertedMoney = action.payload;
+    },
     addInsertedMoney: (state, action: PayloadAction<number>) => {
       state.insertedMoney += action.payload;
     },
   },
 });
 
-export const { setProducts, setChoosenProductId, addInsertedMoney } = productsSlice.actions;
+export const {
+  setProducts, setChoosenProductId, setInsertedMoney, addInsertedMoney,
+} = productsSlice.actions;
 
 export default productsSlice.reducer;
