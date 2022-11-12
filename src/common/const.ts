@@ -37,7 +37,7 @@ export const PRODUCTS: Product[] = [
     id: 6,
     name: 'Fanta',
     type: 'Cold drink',
-    price: 0,
+    price: 100,
   },
   {
     id: 7,
