@@ -1,24 +1,35 @@
 import { FormEvent, ReactNode } from 'react';
 
 interface DashboardFormProps {
-  name: string;
-  message: string;
-  value?: string;
-  disabled?: boolean;
-  children?: ReactNode;
-  submitHandler: (value: string) => void;
-  changeValue?: (value: string) => void;
+  name: string
+  message: string
+  value?: string
+  disabled?: boolean
+  children?: ReactNode
+  onSubmit: (value: string) => void
+  changeValue?: (value: string) => void
 }
 
-function DashboardForm({
+export const DashboardForm = ({
   name,
   message,
   value,
   disabled = false,
   children,
-  submitHandler,
+  onSubmit,
   changeValue,
-}: DashboardFormProps) {
+}: DashboardFormProps) => {
+  const handleSubmit = (event: FormEvent) => {
+    event.preventDefault();
+    const form = new FormData(event.target as HTMLFormElement);
+
+    const nameValue = form.get(name);
+
+    if (nameValue && typeof nameValue === 'string') {
+      onSubmit(nameValue);
+    }
+  };
+
   return (
     <form className="dashboard-form" onSubmit={handleSubmit}>
       <label htmlFor={name} className="dashboard-form__label">{message}</label>
@@ -34,17 +45,4 @@ function DashboardForm({
       {children}
     </form>
   );
-
-  function handleSubmit(event: FormEvent) {
-    event.preventDefault();
-    const form = new FormData(event.target as HTMLFormElement);
-
-    const nameValue = form.get(name);
-
-    if (nameValue && typeof nameValue === 'string') {
-      submitHandler(nameValue);
-    }
-  }
-}
-
-export default DashboardForm;
+};

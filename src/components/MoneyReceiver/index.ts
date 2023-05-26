@@ -1,0 +1,1 @@
+export { MoneyReceiver } from './MoneyReceiver';

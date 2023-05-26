@@ -1,16 +1,15 @@
 import { useMemo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setSelectedProductId, addInsertedMoney, setInsertedMoney } from '../../store/products/slice';
+import { MoneyReceiver } from '../MoneyReceiver';
+import { SelectedProduct } from '../SelectedProduct';
+import { selectProductById, selectProducts } from '../../store/products/selector';
+import { getChangeOutput } from '../../utils/getChangeOutput';
 
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { setChoosenProductId, addInsertedMoney, setInsertedMoney } from '../../store/reducers/productsSlice';
-import MoneyReceiver from '../MoneyReceiver/MoneyReceiver';
-import ChooseProduct from '../ChooseProduct/ChooseProduct';
-import { getProductById } from '../../store/selectors/productsSelector';
-import getChangeOutput from '../../common/getChangeOutput';
-
-function Dashboard() {
-  const dispatch = useAppDispatch();
-  const insertedMoney = useAppSelector((state) => state.products.insertedMoney);
-  const product = useAppSelector((state) => getProductById(state, state.products.choosenProductId));
+export const Dashboard = () => {
+  const dispatch = useDispatch();
+  const { insertedMoney } = useSelector(selectProducts);
+  const product = useSelector(selectProductById);
 
   const changeOutput = useMemo(() => {
     if (!product || !insertedMoney) {
@@ -24,9 +23,9 @@ function Dashboard() {
 
   return (
     <section className="dashboard">
-      <MoneyReceiver handleSubmit={(money) => dispatch(addInsertedMoney(money))} />
+      <MoneyReceiver onSubmit={(money) => dispatch(addInsertedMoney(money))} />
 
-      <ChooseProduct handleSubmmit={(productId) => dispatch(setChoosenProductId(productId))} />
+      <SelectedProduct onSubmit={(productId) => dispatch(setSelectedProductId(productId))} />
 
       <div className="dashboard__output">
         <div className="dashboard__change-output">
@@ -34,7 +33,7 @@ function Dashboard() {
             changeOutput.map(([key, value]) => {
               if (value) {
                 return (
-                  <span>
+                  <span key={key}>
                     {key}
                     ₽:
                     {' '}
@@ -53,7 +52,7 @@ function Dashboard() {
         <button
           type="button"
           onClick={() => {
-            dispatch(setChoosenProductId(0));
+            dispatch(setSelectedProductId(0));
             dispatch(setInsertedMoney(0));
           }}
           className="dashboard__button"
@@ -73,6 +72,4 @@ function Dashboard() {
       </div>
     </section>
   );
-}
-
-export default Dashboard;
+};

@@ -1,8 +1,9 @@
 import { clsx } from 'clsx';
-import { useAppSelector } from '../../store/hooks';
+import { useSelector } from 'react-redux';
+import { selectProducts } from '../../store/products/selector';
 
-function Display() {
-  const { list: products, insertedMoney } = useAppSelector((state) => state.products);
+export const Display = () => {
+  const { list: products, insertedMoney } = useSelector(selectProducts);
 
   return (
     <section className="display">
@@ -27,6 +28,4 @@ function Display() {
       </ul>
     </section>
   );
-}
-
-export default Display;
+};

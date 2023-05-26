@@ -1,19 +1,19 @@
 import { useEffect } from 'react';
-import { fetchGetProducts } from './common/fetchs/productFetchs';
-import Dashboard from './components/Dashboard/Dashboard';
-import Display from './components/Display/Display';
-import { useAppDispatch } from './store/hooks';
-import { setProducts } from './store/reducers/productsSlice';
+import { useDispatch } from 'react-redux';
+import { getProducts } from './api/getProducts';
+import { Dashboard } from './components/Dashboard';
+import { Display } from './components/Display';
+import { setProducts } from './store/products/slice';
 
-function App() {
-  const dispatch = useAppDispatch();
+export const App = () => {
+  const dispatch = useDispatch();
+
+  const mountApp = async () => {
+    const products = await getProducts();
+    dispatch(setProducts(products));
+  };
 
   useEffect(() => {
-    async function mountApp() {
-      const products = fetchGetProducts();
-      dispatch(setProducts(products));
-    }
-
     mountApp();
   }, []);
 
@@ -24,6 +24,4 @@ function App() {
       <Dashboard />
     </div>
   );
-}
-
-export default App;
+};
